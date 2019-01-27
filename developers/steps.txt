@@ -1,0 +1,14 @@
+1 - Instalar node y npm (se instalan juntos)
+
+2 - Actualizar dependencias de package.json con npm install
+
+3 - Dejar a la escucha las compilaciones al hacer cambios - npm run watch
+    Actualizar cambios npm run dev
+
+4 - Los componentes se almacenan en:
+	resorces -> assets -> js -> components
+    Los componentes se especifican en:
+	resorces -> assets -> js -> components -> app.js
+
+webpack.mix.js
+
