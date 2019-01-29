@@ -4,14 +4,14 @@
 
         <div class="card-body">
             <input v-if="this.editMode" type="text" class="form-control" v-model="throught.description">
-            <p v-else>{{throught.description}}</p>
+            <p v-else v-text="throught.description"></p>
         </div>
 
         <div class="card-footer">
-            <button v-if="this.editMode" class="btn btn-success" v-on:click="update()">Guardar cambios</button>
-            <button v-else class="btn btn-default" v-on:click="edit()">Editar</button>
+            <button v-if="this.editMode" class="btn btn-success" @click="update()">Guardar cambios</button>
+            <button v-else class="btn btn-default" @click="edit()" :title="this.title_edit">Editar</button>
 
-            <button class="btn btn-danger" v-on:click="remove()">Eliminar</button>
+            <button class="btn btn-danger" @click="remove()" :title="this.title_delete">Eliminar</button>
         </div>
     </div>
 </template>
@@ -22,7 +22,9 @@
 
         data() {
             return {
-                editMode : false
+                editMode : false,
+                title_edit : 'Editar elemento',
+                title_delete : 'Eliminar elemento'
             }
         },
 

@@ -18,4 +18,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/laracast', 'HomeController@laracast')->name('laracast');
+
 Route::apiResource('throughts', 'ThroughtController');

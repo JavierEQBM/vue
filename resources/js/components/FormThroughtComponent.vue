@@ -3,7 +3,7 @@
         <div class="card-header">¿En qué estás pensando ahora?</div>
 
         <div class="card-body">
-            <form action="" v-on:submit.prevent="create()">
+            <form action="" @submit.prevent="create()">
                 <div class="form-group">
                     <label for="description">Ahora estoy pensando en:</label>
                     <input type="text" class="form-control" name="description" v-model="description">

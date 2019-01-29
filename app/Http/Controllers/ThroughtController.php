@@ -17,7 +17,7 @@ class ThroughtController extends Controller
      */
     public function index()
     {
-        return \App\Throught::where('user_id', auth()->id())->get();
+        return \App\Throught::where('user_id', auth()->id())->orderByDesc('id')->get();
     }
 
     /**

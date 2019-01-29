@@ -1779,21 +1779,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      mounted: false,
       throughts: []
     };
   },
   methods: {
     create: function create(throught) {
-      this.throughts.push(throught);
+      this.throughts.unshift(throught);
     },
-    update: function update(index, throught) {
-      this.throughts[index] = throught;
+    update: function update(throught) {
+      this.throughts[this.throughts.findIndex(function (throught) {
+        return throught.id == throught.id;
+      })] = throught;
     },
     remove: function remove(index) {
       this.throughts.splice(index, 1);
+    }
+  },
+  computed: {
+    length: function length() {
+      return this.throughts.length;
     }
   },
   mounted: function mounted() {
@@ -1801,6 +1811,7 @@ __webpack_require__.r(__webpack_exports__);
 
     axios.get('throughts').then(function (response) {
       _this.throughts = response.data;
+      _this.mounted = true;
     });
   }
 });
@@ -1874,11 +1885,95 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {};
+    return {
+      value: 10,
+      tasks: [{
+        description: 'Ir a la tienda',
+        completed: true,
+        id: 1
+      }, {
+        description: 'Terminar tutorial',
+        completed: false,
+        id: 2
+      }, {
+        description: 'Donar',
+        completed: false,
+        id: 3
+      }, {
+        description: 'Limpiar inbox',
+        completed: false,
+        id: 4
+      }, {
+        description: 'Hacer la cena',
+        completed: false,
+        id: 5
+      }, {
+        description: 'Limpiar habitación',
+        completed: true,
+        id: 6
+      }]
+    };
   },
-  methods: {},
+  methods: {
+    add: function add() {
+      this.value++;
+    },
+    complete_task: function complete_task(id) {
+      this.tasks.find(function (task) {
+        return task.id === id;
+      }).completed = true;
+    }
+  },
+  computed: {
+    completed_tasks: function completed_tasks() {
+      return this.tasks.filter(function (task) {
+        return task.completed;
+      });
+    },
+    incompleted_tasks: function incompleted_tasks() {
+      return this.tasks.filter(function (task) {
+        return !task.completed;
+      });
+    },
+    computed_value: function computed_value() {
+      return this.value + 10;
+    }
+  },
   mounted: function mounted() {}
 });
 
@@ -1940,7 +2035,9 @@ __webpack_require__.r(__webpack_exports__);
   props: ['throught'],
   data: function data() {
     return {
-      editMode: false
+      editMode: false,
+      title_edit: 'Editar elemento',
+      title_delete: 'Eliminar elemento'
     };
   },
   methods: {
@@ -36826,16 +36923,17 @@ var render = function() {
       [
         _c("form-throught-component", { on: { create: _vm.create } }),
         _vm._v(" "),
+        _c("h4", { staticClass: "text-primary font-weight-bold" }, [
+          _vm._v("Pensamientos: " + _vm._s(_vm.length))
+        ]),
+        _vm._v(" "),
         _vm._l(_vm.throughts, function(throught, index) {
           return _c("throught-component", {
             key: throught.id,
             attrs: { throught: throught },
             on: {
               update: function($event) {
-                var i = arguments.length,
-                  argsArray = Array(i)
-                while (i--) argsArray[i] = arguments[i]
-                _vm.update.apply(void 0, [index].concat(argsArray))
+                _vm.update.apply(void 0, arguments)
               },
               remove: function($event) {
                 _vm.remove(index)
@@ -36949,7 +37047,109 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "col-12" }, [
-    _vm._v("\n    LARACAST FIRST COMPONENT\n")
+    _vm._v("\n    LARACAST FIRST COMPONENT\n\n    "),
+    _c("h1", [
+      _vm._v("La fecha es "),
+      _c("span", { domProps: { textContent: _vm._s(new Date()) } })
+    ]),
+    _vm._v(" "),
+    _c("button", { staticClass: "btn btn-primary", on: { click: _vm.add } }, [
+      _vm._v("+1")
+    ]),
+    _vm._v(" "),
+    _c("h4", [_vm._v("Valor: " + _vm._s(this.value))]),
+    _vm._v(" "),
+    _c("h4", [
+      _vm._v("Valor + 10: "),
+      _c("span", { domProps: { textContent: _vm._s(_vm.computed_value) } })
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "tasks mt-3" }, [
+      _c("div", { staticClass: "complete" }, [
+        _c("h3", [_vm._v("Tareas completas:")]),
+        _vm._v(" "),
+        _c(
+          "ul",
+          _vm._l(_vm.completed_tasks, function(task) {
+            return _c("li", {
+              staticClass: "p-3 text-success",
+              domProps: { textContent: _vm._s(task.description) }
+            })
+          }),
+          0
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "incomplete" }, [
+        _c("h3", [_vm._v("Tareas incompletas")]),
+        _vm._v(" "),
+        _c(
+          "ul",
+          _vm._l(_vm.incompleted_tasks, function(task) {
+            return _c("li", { staticClass: "p-3 text-danger" }, [
+              _c("span", {
+                domProps: { textContent: _vm._s(task.description) }
+              }),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-secondary",
+                  on: {
+                    click: function($event) {
+                      _vm.complete_task(task.id)
+                    }
+                  }
+                },
+                [_vm._v("Completar")]
+              )
+            ])
+          }),
+          0
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "mixed" }, [
+        _c("h3", [_vm._v("Todas las tareas")]),
+        _vm._v(" "),
+        _c(
+          "ul",
+          _vm._l(_vm.tasks, function(task) {
+            return _c(
+              "li",
+              {
+                staticClass: "p-3",
+                class: {
+                  "text-success": task.completed,
+                  "text-danger": !task.completed
+                }
+              },
+              [
+                _c("span", {
+                  domProps: { textContent: _vm._s(task.description) }
+                }),
+                _vm._v(" "),
+                !task.completed
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-secondary",
+                        on: {
+                          click: function($event) {
+                            _vm.complete_task(task.id)
+                          }
+                        }
+                      },
+                      [_vm._v("Completar")]
+                    )
+                  : _vm._e()
+              ]
+            )
+          }),
+          0
+        )
+      ])
+    ])
   ])
 }
 var staticRenderFns = []
@@ -37033,7 +37233,9 @@ var render = function() {
               }
             }
           })
-        : _c("p", [_vm._v(_vm._s(_vm.throught.description))])
+        : _c("p", {
+            domProps: { textContent: _vm._s(_vm.throught.description) }
+          })
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "card-footer" }, [
@@ -37054,6 +37256,7 @@ var render = function() {
             "button",
             {
               staticClass: "btn btn-default",
+              attrs: { title: this.title_edit },
               on: {
                 click: function($event) {
                   _vm.edit()
@@ -37067,6 +37270,7 @@ var render = function() {
         "button",
         {
           staticClass: "btn btn-danger",
+          attrs: { title: this.title_delete },
           on: {
             click: function($event) {
               _vm.remove()
