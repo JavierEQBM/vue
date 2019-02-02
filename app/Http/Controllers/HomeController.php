@@ -13,7 +13,9 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except([
+            'laracast'
+        ]);
     }
 
     /**
@@ -23,7 +25,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('home', [
+            'throughts' =>  app(__NAMESPACE__ .  '\ThroughtController')->index()
+        ]);
     }
 
     public function laracast()

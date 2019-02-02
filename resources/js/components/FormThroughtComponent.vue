@@ -33,8 +33,7 @@
 
                 axios.post('throughts', params)
                     .then((response) => {
-                        const throught = response.data;
-                        this.$emit('create', throught);
+                        this.$emit('create', response.data);
                     });
             }
         },

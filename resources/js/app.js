@@ -23,6 +23,8 @@ window.Vue = require('vue');
 Vue.component('laracast-first-component', require('./components/LaracastFirstComponent.vue').default);
 Vue.component('laracast-second-component', require('./components/LaracastSecondComponent.vue').default);
 
+Vue.component('slot-component', require('./components/SlotComponent.vue').default);
+
 Vue.component('container-throughts-component', require('./components/ContainerThroughtsComponent.vue').default);
 Vue.component('form-throught-component', require('./components/FormThroughtComponent.vue').default);
 Vue.component('throught-component', require('./components/ThroughtComponent.vue').default);

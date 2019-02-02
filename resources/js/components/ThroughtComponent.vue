@@ -18,7 +18,9 @@
 
 <script>
     export default {
-        props : ['throught'],
+        props : [
+            'throught'
+        ],
 
         data() {
             return {

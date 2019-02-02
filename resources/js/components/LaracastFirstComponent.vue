@@ -34,6 +34,14 @@
                 </ul>
             </div>
         </div>
+
+        <div class="slots bg-primary text-white p-3">
+            <ul>
+                <li><slot-component>Go to work <span>at 7</span></slot-component></li>
+                <li><slot-component>Go to school <span>at 13</span></slot-component></li>
+                <li><slot-component>Go to bank <span>at 15</span></slot-component></li>
+            </ul>
+        </div>
     </div>
 </template>
 

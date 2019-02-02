@@ -3,6 +3,6 @@
 @section('content')
 
 <div class="container">
-    <container-throughts-component></container-throughts-component>
+    <container-throughts-component :throughts="{{$throughts}}"></container-throughts-component>
 </div>
 @endsection
